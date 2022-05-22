@@ -19,7 +19,7 @@ First of all, the ESP-IDF development environment should be ready in advance.
 
 It's RGB Pixel Detector & drawing Histogram. In the image obtained from the camera, the center RGB pixel information is displayed, and the histogram of the entire image is displayed.
 [RGB Pixel Detector & Histogram](https://youtu.be/DNQuCkPtzYA)
-[![Foo](https://i.ytimg.com/vi/DNQuCkPtzYA/hqdefault.jpg)](https://youtu.be/DNQuCkPtzYA)
+[![Foo](https://github.com/0015/ESP32-OpenCV-Projects/blob/main/esp32/examples/color_code/demo/demo.gif)](https://youtu.be/DNQuCkPtzYA)
 
 
 ### Created & Maintained By
