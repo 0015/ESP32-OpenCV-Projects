@@ -1,7 +1,7 @@
 /////////////////////////////////////////////////////////////////
 /*
   RGB Pixel Detector & Histogram (Running OpenCV on ESP32)
-  For More Information:
+  For More Information: https://youtu.be/DNQuCkPtzYA
   Created by Eric N. (ThatProject)
 */
 /////////////////////////////////////////////////////////////////
