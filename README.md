@@ -4,6 +4,17 @@ A collection of standalone computer-vision projects running **OpenCV directly on
 
 ## Projects
 
+### [`cube_solver/`](cube_solver/README.md) — Rubik's Cube Solver (ESP32-S3)
+
+A standalone Rubik's cube solver. Point each face at the built-in camera and the device scans the colors via HSV classification, validates the cube state, computes a solution, and walks you through it move by move on the LCD — no phone app, no cloud, no host PC.
+
+<p align="center">
+  <img src="cube_solver/misc/cube_solver.jpeg" width="400" alt="Cube Solver running on the printed handheld case"/>
+  <img src="cube_solver/misc/parts.jpeg" width="400" alt="Disassembled printed case, battery, and wiring"/>
+</p>
+
+[Watch the demo on YouTube](https://youtu.be/dRtKP-6v5lA)
+
 ### [`dice_dice/`](dice_dice/README.md) — Real-Time Dice Pip Counter (ESP32-S3)
 
 Detects and counts dice pips from a live camera feed using a classical OpenCV pipeline (Otsu threshold, morphology, connected components) and shows the result as an animated overlay on an LCD.
@@ -32,7 +43,7 @@ Detects and counts dice pips from a live camera feed using a classical OpenCV pi
 Running OpenCV on a microcontroller has historically required a manual cross-compilation of the library for the target toolchain. The projects in this repo reflect that evolution:
 
 - **`legacy_project/`** is based on [joachimBurket/esp32-opencv](https://github.com/joachimBurket/esp32-opencv), a hand cross-compiled OpenCV port for the ESP32 (Xtensa LX6). It is preserved for reference but is no longer used or maintained.
-- **`dice_dice/`** and current/future projects instead use [**`100312dog/opencv-mobile-prebuilt-newlib`**](https://components.espressif.com/components/100312dog/opencv-mobile-prebuilt-newlib), a prebuilt OpenCV component distributed through the ESP-IDF Component Manager. Since it ships already built for the newlib toolchain, it can simply be added as a one-line dependency in `idf_component.yml` — no manual cross-compilation needed.
+- **`dice_dice/`**, **`cube_solver/`**, and current/future projects instead use [**`100312dog/opencv-mobile-prebuilt-newlib`**](https://components.espressif.com/components/100312dog/opencv-mobile-prebuilt-newlib), a prebuilt OpenCV component distributed through the ESP-IDF Component Manager. Since it ships already built for the newlib toolchain, it can simply be added as a one-line dependency in `idf_component.yml` — no manual cross-compilation needed.
 
 See each project's own README for hardware requirements, build instructions, and implementation details.
 
@@ -40,7 +51,7 @@ See each project's own README for hardware requirements, build instructions, and
 
 OpenCV on ESP32 is **not** the full desktop library — it only exposes a stripped-down subset that fits within the chip's limited flash and RAM:
 
-- Only the **`core`** and **`imgproc`** modules are available (basic matrix ops, filtering, thresholding, morphology, contours/connected components, histograms). Both `legacy_project` and `dice_dice` are built against this same reduced module set.
+- Only the **`core`** and **`imgproc`** modules are available (basic matrix ops, filtering, thresholding, morphology, contours/connected components, histograms). `legacy_project`, `dice_dice`, and `cube_solver` are all built against this same reduced module set.
 - No `dnn`, `ml`, `video`, `videoio`, `calib3d`, `features2d`, or `objdetect` modules — no built-in face/object detection, optical flow, camera calibration, or neural-network inference.
 - No hardware-accelerated backends (CUDA/OpenCL) — everything runs single-threaded on the Xtensa/RISC-V CPU core, so complex algorithms are either too slow or too large to run at usable frame rates.
 - As a result, every project here relies on **classical, lightweight CV pipelines** (grayscale conversion, Otsu thresholding, morphological filtering, connected-component analysis) rather than heavier techniques like deep-learning-based detection.
